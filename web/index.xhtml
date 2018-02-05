@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery-ui.theme.min.css"/>                
+        
+        <script src="#{request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+        <script src="#{request.contextPath}/resources/js/jquery-ui.min.js"></script>
+        
+        
+        <script>
+            
+            $(function(){
+                
+                $("#modal").dialog({
+                
+                modal: true,
+                title: 'titulo de la ventana',
+                width:918,
+                height:450,
+                buttons: [
+                            {
+                                text: "Ok",
+                                icon: "ui-icon-heart",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+
+                                // Uncommenting the following line would hide the text,
+                                // resulting in the label being used as a tooltip
+                                //showText: false
+                            }
+                        ]
+                
+                });                
+                
+                //$("#modal").dialog( "moveToTop" );
+                
+                $("#principal").load(
+                    "paginaSimple_2.xhtml",
+                    {}, // Datos para enviar (en este caso, ninguno)
+                    function (responseText, textStatus, XMLHttpRequest) {
+                        alert("Pagina:" + responseText );
+                    // Quitar el class de “cargando”
+                    ///dialog.removeClass('loading');
+                    
+                    }
+                    );
+                
+                
+            });
+            
+            
+            function mostrarDialog() {
+
+                    // La ruta Ajax
+                    var url = 'https://www.google.com.pe';
+
+                    // mostrar un imágenes de cargando a través de CSS
+                    //var dialog = $('<div class="loading" ></div>').append('body');
+                    
+                     $("#modal").dialog({
+                
+                        autoOpen:true,
+                        modal: true,
+                        title: 'titulo de la ventana',
+                        width:400,
+                        height:450,
+                        
+                        buttons: [
+                            {
+                                text: "Ok",
+                                icon: "ui-icon-heart",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+
+                                // Uncommenting the following line would hide the text,
+                                // resulting in the label being used as a tooltip
+                                //showText: false
+                            }
+                        ]
+
+                        });
+                        
+                            $("#principal").load("paginaSimple_2.xhtml", function( response, status, xhr ) {
+                    if ( status == "error" ) {
+                    var msg = "Sorry but there was an error: ";
+                    $( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+                  }} );
+
+                    // abrir el dialog
+                    //dialog.dialog();
+                    /*dialog.dialog({
+
+                    // añadir un listener para borrar el dialog al cerrarlo
+                    close: function(event, ui) {
+
+                    // borra el div con sus eventos y datos
+                    dialog.remove();
+                    },
+                    modal: true,
+                    title: 'titulo de la ventana',
+                    width:918,
+                    height:450
+                    });*/
+
+                    // Cargar contenido con Ajax en la ventana
+                    return false;
+               
+            };            
+            
+        </script>
+        
+    </head>
+    <body>Hello from Facelets
+        <form>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" id="nombre"/>
+            <button name="enviar" onclick="return mostrarDialog()" value="enviar">Enviar</button>            
+            
+            <div id="modal">                
+                <div id="principal"> div PRINCIPAL </div>
+            </div>
+            
+            <div id="modal_2" title="External Page">
+            </div>
+        </form>
+    </body>
+    
+    
+    
+</html>
+

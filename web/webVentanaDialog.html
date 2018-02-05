@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+    <head>
+
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.min.css">        
+
+        <style type="text/css">
+
+            /*Clase que ayuda que la X para cerrar dialog de la ventana no aparezca*/
+            .no-close .ui-dialog-titlebar-close {
+                display: none;
+            }
+            
+            .fondoRojo{
+                background: red;
+            }
+
+        </style>
+        
+        <script src="resources/js/jquery-3.2.1.min.js"></script>
+        <script src="resources/js/jquery-ui.min.js"></script>      
+       
+        <script>
+            //Funcion anonima de java script que permite que se cargue toda la pagina antes de ejecutarse
+            $( document ).ready(function () {
+
+                /*Abrir url externa en un Dialog, Se envia parametros */
+                document.getElementById("btnDialog").addEventListener("click", abrirDialog, false);
+
+                /*Cargar contenido desde archivo plano*/
+                document.getElementById("btnArchivo").addEventListener("click", abrirArchivoPlano, false);
+
+            });
+                function abrirDialog(val) {
+                    
+                    //alert("abrirDialog:" + val);
+
+                    $("#dialog").dialog({
+                        title: "Registrar Persona",
+                        //dialogClass: "no-close",                        
+                        open: true,
+                        //height: 400, //Por defecto es auto
+                        maxHeight: 500,
+                        width: 800,
+                        maxWidth: 1000,
+                        closeOnEscape: false,
+                        modal: true,
+                        classes: {                            
+                            //"ui-dialog": "fondoRojo" //Reemplaza el estilo (ui-corner-all) por defecto
+                        },
+                        show: {
+                            effect: "blind",
+                            duration: 200
+                        },
+                        buttons: [
+                            {
+                                text: "Ok",
+                                icon: "ui-icon-heart",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+
+                                // Uncommenting the following line would hide the text,
+                                // resulting in the label being used as a tooltip
+                                //showText: false
+                            }
+                        ]
+
+                    });
+
+                    var numValue = 10;
+                    $("#principal").load("faces/webPersonaRegistrar.xhtml",{number:numValue}, function (response, status, xhr) {
+
+                        if (status == "success") {
+                            //alert("response:" + response);
+                            //alert("xhr:" + xhr);
+
+                        } else if (status == "error") {
+                            var msg = "Sorry but there was an error: ";
+                            $("#error").html(msg + xhr.status + " " + xhr.statusText);
+                        }
+                    });
+
+                };
+
+            function abrirArchivoPlano() {
+
+                $("#plano").load("resources/archivos/contenido.txt");
+            }
+
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <form>
+
+            <input id="btnDialog" type="button" value="Registra Persona en DIALOG"/>
+            <label> DNI: </label>
+            <input id="dni" type="text" name="dni" />
+            <div id="dialog">
+                <div id="principal" ></div>
+            </div>        
+
+            <br/>
+            <br/>
+
+            <input id="btnArchivo" type="button" value="Cargar Contenido desde Archivo Plano"/>
+            <div id="plano">Se cargará texto desde un archivo plano!!: </div>
+
+            <br/>
+            <br/> 
+
+            <div> div SECUENDARIO <br/>
+                <label> Nombre: </label>
+                <input id="nombre" type="text" name="nombre" value="test!!" />
+
+            </div>
+            
+
+        </form>
+
+    </body>
+
+</html>

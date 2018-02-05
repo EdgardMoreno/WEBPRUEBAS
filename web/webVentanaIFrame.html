@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+
+        <style type="text/css">
+
+            body{
+                background-color: rgb(94, 0, 181);
+            }
+            
+            #galeria img {
+                width: 100px;
+                height: 100px;
+            }
+
+            #contenedor  {
+                position: absolute;
+                background-color: #FFF;
+                width: 100px;
+                height: 100px;
+                left:50%;
+                top:50%;
+                margin-left:-50px;
+                margin-top:-50px;                
+              
+            }
+
+            
+            a:link {
+                color: green;
+            }
+            /* visited link */
+            a:visited {
+                color: white;
+            }
+           
+            a:active {
+                color: blue;
+            }
+
+           
+        </style>
+
+        <script src="resources/js/jquery-3.2.1.min.js"></script>
+        
+
+        <script>
+            $(document).ready(function () {
+                
+                /*EJEMPLO 01 - USO DE LINK*/
+                $("#miFormulario").hide();
+                
+                $("#miVinculo").click(function(e){
+                    $("#miFormulario").fadeIn(1000);
+                    
+                    /*Desabilitar el comportamiento del elemeto LINK para que no refresque toda la pagina
+                     * Tambien se podria realizar con " return false  ": Si no se ingresalo explicado 
+                     * cuando se de clic en el link se vera que intenta llamar al formulario pero inmediatamente
+                     * se linkea hacia al web ingresada:  https://www.google.com.pe*/
+                    e.preventDefault();
+                    
+                    
+                    
+                });
+
+                /*EJEMPLO 2: VENTANA EMERGENTE - (METODO OPEN)*/
+                /*el 2do atributo indica el nombre unico de la venta, es como el id, si se quiere abrir varias ventanas el id tiene que se diferente de lo contrario se interpreta que es la misma y se sobreescribira la configuracion*/
+
+                //open("https://www.google.com.pe","ventana_2","width=300, height=200");
+
+                
+                                
+                /*EJEMPLO 3: CERRAR VENTANA EMERGENTE */
+                var propiedades = "width=700, height=400, left=300, top=100, scrollbars=no, toolbars=no ";                
+                //var miVentana = open("faces/webPersonaRegistrar.xhtml","ventana_1",propiedades);
+                
+                $("#btnCerrar").click(function(){
+                    
+                    miVentana.close(); 
+                    return false; //tambien se puede utilizar: e.preventDefault(); -> anula el comportamiento del vinculo para hacer submit y evitar que se refresque la pagina
+                });
+
+                /*EJEMPLO 4: VENTANA EMERGENTE: IFRAME*/
+                $("#pulsar").click(function(e){
+                    
+                    /*funcion Attr de Jquery permitira cambiar el valor de cuaquier atributo, en este caso el SRC.*/
+                    e.preventDefault();
+                    $("#contenedor").fadeIn(1000);
+                    $("#miIframe").attr("src","faces/webPersonaRegistrar_iframe.xhtml?number=43390521") ;
+
+                    //document.getElementById("form:numDocuIden").value = '4339';
+                    
+                });
+
+                //Ocultar el div del iframe al momento de cargar la pagina.
+                $("#contenedor").hide();       
+                
+                
+
+            });
+
+
+            /*Funcion que se invoca desde el iframe HIJO*/
+            function cerrarIFrame(valor){
+                document.getElementById("dni_2").value = valor;
+                $("#contenedor").hide();  
+                $("#miIframe").attr("src","") ;
+
+            }
+
+
+        </script>
+
+    </head>
+    <body>
+        
+        <div><h2>EJEMPLO 1: USO DE LINK</h2></div>
+        
+        <a href="https://www.google.com.pe/" id="miVinculo">Clic Me</a>
+        
+        <form id="miFormulario">            
+            <table>
+                <tr>
+                    <th>Nombre:</th>
+                    <td><input id="name" name="name"/></td>
+                </tr>
+                <tr>
+                    <th>DNI:</th>
+                    <td><input id="dni" name="dni"/></td>
+                </tr>
+            </table>
+        </form>
+        
+        <br/>
+        
+        <div><h2>EJEMPLO 2: VENTANA EMERGENTE - ABRIR AL CARGAR LA PAGINA- (METODO OPEN)</h2></div>               
+
+        <div><h2>EJEMPLO 3: CERRAR VENTANA EMERGENTE</h2></div>        
+        <a href="" id="btnCerrar">Cerrar ventana emergente </a>
+
+        
+
+        <div><h2>EJEMPLO 4: VENTANA EMERGENTE: IFRAME</h2></div>        
+        <a href="" id="pulsar">Pulsar</a>
+        <div id="contenedor"><iframe id="miIframe" src="" width="600" height="300" frameborder="0" ></iframe> </div>        
+        <br/>
+        <label>DNI DE LA PERSONA:</label>
+        <input type="text" id="dni_2" name="dni"/>
+
+
+        
+        
+    </body>
+</html>

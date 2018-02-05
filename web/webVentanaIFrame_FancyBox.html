@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="resources/css/jquery.fancybox-2.1.7.css" media="screen"/>
+
+        <style type="text/css">
+
+            body{
+                background-color: rgb(94, 0, 181);
+            } 
+
+
+            /* selected link */
+            
+            
+            a:link {
+                color: green;
+            }
+
+            /* visited link */
+            a:visited {
+                color: white;
+            }
+
+            a:hover {
+                color: hotpink;
+            }
+
+            a:active {
+                color: blue;
+            }
+
+           
+        </style>
+
+        <script src="resources/js/jquery-3.2.1.min.js"></script>
+        <script src="resources/js/jquery.fancybox-2.1.7.js"></script>  
+
+        <script>
+
+            $(document).ready(function () {
+                
+               $(".iframe").fancybox({
+
+                      type              :   "iframe",
+                      modal             :   "true",
+                      enableEscapeButton:   "false",
+                      autoDimensions    :   "false",
+                      width             :   800,
+                      height            :   600,                  
+                      overlayColor      :   "#797379",
+                      titleShow         :   true,
+                      titlePosition     :   "outside",
+                      overlayOpacity    :   0.6,
+                      transitionIn      :   "elastic",
+                      transitionOut     :   "elastic"
+
+                  });
+              
+
+               $("#btnRegistrar").click(function(){
+
+                  alert("Boton");
+                  $("#conten").click();
+
+                  
+
+               });
+
+            });
+            
+
+            //Funcion que se invoca desde el iframe HIJO
+            function cerrarIFrame(valor){
+                document.getElementById("dni_2").value = valor;
+                //$(".fancybox-overlay").hide();  
+                //$(".fancybox-wrap").hide();                
+                //$(".fancybox-iframe").remove();
+                
+            }
+
+        </script>
+
+    </head>
+    <body>     
+              
+        <form id="form">
+            <div><h2>LINKS CON FANCY BOX: (IFRAMES)</h2>       
+                
+                <H3>1. Para utilizar iframes con fancybox necesitamos que los vinculos tengan la clase IFRAME </H3>
+                <ul>
+                <li><a id="conten" href="faces/webPersonaRegistrar_iframe.xhtml?number=433904" title="RegistrarPersona" class="iframe" >Registrar Persona</a></li>
+                </ul>               
+                
+            </div>             
+            <label style="color:white">ID DE LA PERSONA OBTENIDO :</label>
+            <input type="text" id="dni_2" name="dni"/>
+
+            <h3>2. Probando desde boton</h3>            
+            <input type="button" name="btnRegistrar" id="btnRegistrar" value="Nueva Persona" class="iframe" />
+
+        </form>       
+        
+    </body>
+</html>

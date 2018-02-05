@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
+    <f:metadata>        
+        <f:viewParam name="number" value="#{personController_iframe.sic1idenpersId.codIden}"/>
+        <f:viewParam name="razonSocial" value="#{personController_iframe.sic1persorga.desPersorga}"/>
+    </f:metadata>
+
+
+    <h:head>
+
+        <link rel="stylesheet" style=" " href="#{request.contextPath}/resources/css/bootstrap.min.css" />
+        <link rel="stylesheet" style=" " href="#{request.contextPath}/resources/css/customizer.css" />
+
+        <script src="#{request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>  
+        <script src="#{request.contextPath}/resources/js/bootstrap.min.js"></script>  
+
+
+        <script>
+
+            $(document).ready(function () {
+
+
+
+            });
+
+            function cerrarDialog(data) {
+
+                var status = data.status; // Can be "begin", "complete" or "success".
+                var source = data.source; // The parent HTML DOM element.
+
+                switch (status) {
+                    case "begin": // Before the ajax request is sent.
+                        break;
+
+                    case "complete": // After the ajax response is arrived.
+                        break;
+
+                    case "success": // After update of HTML DOM based on ajax response. 
+                        var valor = document.getElementById("form:idPersona").value;
+                        parent.$.fancybox.close();
+                        parent.cerrarIFrame(valor);
+                        break;
+                }
+            }
+
+        </script>
+
+
+    </h:head>
+
+    <h:body>
+
+        <div class="container">
+            <div id="resultado"></div>
+
+            <h:form id="form">
+
+                <h:panelGrid id="pgFields" columns="4" 
+                             style="width:90%"
+                             columnClasses="td-label-1, text_panelGrid_4c , td-label-1 , text_panelGrid_4c">
+
+                    <h:outputLabel value="Documento Identidad:"/>
+                    <h:inputText id="numDocuIden"
+                                 class="form-control"
+                                 style="width:70%"
+                                 value="#{personController_iframe.sic1idenpersId.codIden}">
+                    </h:inputText>
+                    <h:outputLabel value="" />
+                    <h:outputLabel value="" />
+
+                    <h:outputLabel value="Razón Social:"/>
+                    <h:inputText styleClass="form-control left" id="razonSocial" value="#{personController_iframe.sic1persorga.desPersorga}" />
+                    <h:outputLabel value="" />
+                    <h:outputLabel value="" />
+
+                    <h:outputLabel value="Nombre:"/>
+                    <h:inputText  styleClass="form-control" id="primerNombre" value="#{personController_iframe.sic1persindi.desPrimnomb }" />
+
+                    <h:outputLabel value=""/>
+                    <h:outputLabel value=""/>
+
+                    <h:outputLabel value="Apellido Paterno:"/>
+                    <h:inputText  styleClass="form-control" id="apePaterno" value="#{personController_iframe.sic1persindi.desApelpate}" />
+
+                    <h:outputLabel value="Apellido Materno:"/>
+                    <h:inputText  styleClass="form-control" id="apeMaterno" value="#{personController_iframe.sic1persindi.desApelmate}" />
+
+
+                    <h:outputLabel value="Fecha Nacimiento:"/>
+                    <h:inputText value="#{personController_iframe.desFecNaci}" styleClass="form-control datepicker" />
+
+                    <h:outputLabel value="ID_PERSONA:"/>
+                    <h:inputText  id="idPersona" value="#{personController_iframe.sic1persorga.idPersorga}"/>
+
+
+                </h:panelGrid>
+                <br/>
+                <div class="offset-sm-2 col-sm-10">
+                    <h:commandLink value="Grabar" 
+                                   id="btnGrabar"                                   
+                                   styleClass="btn btn-primary">
+                        <f:ajax execute="form" render="idPersona" listener="#{personController_iframe.registrar()}" onevent="cerrarDialog" ></f:ajax>
+                    </h:commandLink>
+
+                </div>
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        <link rel="stylesheet" type="text/css" href="resources/css/jquery.fancybox-2.1.7.css" media="screen"/>
+        
+        <style type="text/css">
+            
+            #galeria img {
+                width: 100px;
+                height: 100px;
+                
+            }
+            
+        </style>
+
+        <script src="resources/js/jquery-3.2.1.min.js"></script>
+        <script src="resources/js/jquery.fancybox-2.1.7.js"></script>        
+        
+        
+        <script>
+            $(document).ready(function () {
+                
+                $("#galeria a").fancybox();
+
+              
+               
+
+            });
+        </script>
+
+    </head>
+    <body>
+        
+        <div><h2>EJEMPLO DEL USO DE LA LIBRERIA FANCY BOX</h2></div>
+        
+        <div id="galeria">
+            <a href="resources/img/fotomural_1.jpg" title="fotomural_1"><img src="resources/img/fotomural_1.jpg" id="imagen1" alt="fotomural_1" /></a>
+            <a href="resources/img/fotomural_2.jpg" title="fotomural_2"><img src="resources/img/fotomural_2.jpg" id="imagen2" alt="fotomural_2"/></a>
+            <a href="resources/img/fotomural_3.jpg" title="fotomural_3"><img src="resources/img/fotomural_3.jpg" id="imagen3" alt="fotomural_3"/></a>
+           
+        </div>
+    </body>
+</html>
