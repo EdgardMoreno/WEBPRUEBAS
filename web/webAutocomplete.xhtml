@@ -4,6 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://xmlns.jcp.org/jsf/core" >    
 
     <h:head>
@@ -15,19 +16,38 @@
         <script src="#{request.contextPath}/resources/js/bootstrap.min.js"></script>  
 
         <style>
-            
+
             .autocomplete{
                 position: absolute;
                 background-color: white;
+                top: 35px;
+                left: 157px;
             }
-            
+
         </style>
-        
+
         <script>
+
+            function fnObtenerFila(e) {
+                alert("Fila de la tabla:" + e.rowIndex);
+                //alert("Fila de la tabla:" + e.rows.length  + " RowIndex:" + e.rowIndex);
+                $("#form\\:DocuIden").click();
+            };
             
-            function fnObtenerFila(e){
+            function fnMostrarResultado(data){
+                //alert("Estatus:" + data.status);
+                switch(data.status){
+                    case "success":                        
+                        var x = $("#form\\:DocuIden").position();
+                        var h = $("#form\\:DocuIden").css("height");
+                        //alert("Top: " + x.top + " Left: " + x.left  + " height: " + h);                        
+                        
+                        $("#listaPersonas").css({"display":""});
+                        $("#listaPersonas").css("top",(x.top + h ) + "px");
+                        $("#listaPersonas").css("left",x.left + "px");
+                        break;
+                }
                 
-                alert("Fila de la tabla:" + e.rows.length  + " RowIndex:" + e.rowIndex);
             }
 
         </script>
@@ -37,55 +57,22 @@
 
         <div class="container">
             <div id="resultado"></div>
-
+                
             <h:form id="form">
-                
-                <h:outputLabel value="Documento Identidad:"/>
-                <h:inputText id="DocuIden"
-                                 class="form-control"
-                                 style="width:70%"
-                                 value="#{autocompleteController.sic1idenpersId.codIden}" >
-                    <f:ajax execute="DocuIden" render="tblPers tblPers_2" event="keypress" listener="#{autocompleteController.buscarPersonas()}"/>
-                </h:inputText>
-                
-                <div id="listaPersonas" class="autocomplete">
-                    <h:dataTable id="tblPers" value="#{autocompleteController.listaPersonas}" var="item" border="1" onclick="fnObtenerFila(this)">
-                        <h:column>
-                            <f:facet name="header">Nro.</f:facet>#{item.codIden}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">idProd</f:facet>#{item.desPers}
-                        </h:column>
-                    </h:dataTable>
-                    
-                    <table id="tblPers_2" class="table table-striped table-bordered bootstrap-datatable datatable">
-                        <thead>
-                            <tr>
-                                <th>ID EDIFICIO</th>
-                                <th>CONDOMINIO</th>                                
-                            </tr>
-                        </thead>   
-                        <tbody>
-                            <c:forEach items="${autocompleteController.listaPersonas}" var="e">
-                                <tr>
-                                    <td>${e.getCodIden()}</td>
-                                    <td class="center">${e.getDesPers()}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
 
                 <h:panelGrid id="pgFields" 
                              columns="4" 
+                             border="1"
                              style="width:90%"
                              columnClasses="td-label-1, text_panelGrid_4c , td-label-1 , text_panelGrid_4c">
 
                     <h:outputLabel value="Documento Identidad:"/>
-                    <h:inputText id="numDocuIden"
+                    <h:inputText id="DocuIden"
                                  class="form-control"
                                  style="width:70%"
-                                 value="#{autocompleteController.sic1idenpersId.codIden}">
+                                 value="#{autocompleteController.sic1idenpersId.codIden}" >
+                        <f:ajax execute="DocuIden" render="tblPers tableIdWrapper" event="keypress" onevent="fnMostrarResultado" listener="#{autocompleteController.buscarPersonas()}"/>
+                        
                     </h:inputText>
                     <h:outputLabel value="" />
                     <h:outputLabel value="" />
@@ -94,11 +81,44 @@
                     <h:inputText styleClass="form-control left" id="razonSocial" value="#{autocompleteController.sic1persorga.desPersorga}" />
                     <h:outputLabel value="" />
                     <h:outputLabel value="" />
+                    
+                    <h:outputLabel value="email:"/>
 
                 </h:panelGrid>
                 
+                <div id="listaPersonas" class="autocomplete" style="display: none" >
+                    <h:dataTable id="tblPers" value="#{autocompleteController.listaPersonas}" var="item" border="1" onclick="fnObtenerFila(this)">
+                        <h:column>
+                            <f:facet name="header">Nro.</f:facet>#{item.codIden}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">idProd</f:facet>#{item.desPers}                            
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:panelGroup id="tableIdWrapper" layout="block">
+                        <table id="tblPers_2" class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID EDIFICIO</th>
+                                    <th>CONDOMINIO</th>                                
+                                </tr>
+                            </thead>   
+                            <tbody>
+                                <ui:repeat var="e" value="#{autocompleteController.listaPersonas}" varStatus="status">
+                                    <tr>
+                                        <td><h:commandLink value="#{e.getCodIden()}" action="#{autocompleteController.seleccionarFila(e)}" /></td>
+                                        <td class="center">#{e.getDesPers()}</td>
+                                        <td><h:commandLink value="Seleccionar" action="#{autocompleteController.seleccionarFila(e)}" /></td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                    </h:panelGroup>
+                </div>
+
                 <br/>
-                
+
                 <div class="offset-sm-2 col-sm-10">
                     <h:commandLink value="Grabar" 
                                    id="btnGrabar"

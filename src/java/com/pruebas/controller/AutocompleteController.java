@@ -116,6 +116,8 @@ public class AutocompleteController {
     
     public void buscarPersonas(){
         
+        listaPersonas.clear();
+        
         List<Sic1pers> lista = new ArrayList<>();
         
         Sic1pers obj = new Sic1pers();
@@ -133,6 +135,14 @@ public class AutocompleteController {
         listaPersonas.add(obj);
         
         System.out.println("Filas: " + listaPersonas.size());        
+        
+    }
+    
+    public void seleccionarFila(Sic1pers obj){
+        
+        System.out.println("Persona:" + obj.getDesPers());
+        this.sic1persorga.setDesPersorga(obj.getDesPers());
+        listaPersonas.clear();
         
     }
 }
