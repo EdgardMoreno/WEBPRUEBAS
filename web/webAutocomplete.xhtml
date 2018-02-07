@@ -38,9 +38,13 @@
                 //alert("Estatus:" + data.status);
                 switch(data.status){
                     case "success":                        
-                        var x = $("#form\\:DocuIden").position();
+                        var x = $("#form\\:DocuIden").position(); //Obtiene la posicion absoluta del elemento
                         var h = $("#form\\:DocuIden").css("height");
-                        //alert("Top: " + x.top + " Left: " + x.left  + " height: " + h);                        
+                        //alert("Top: " + x.top + " Left: " + x.left  + " height: " + h);
+                        
+                        var element = document.getElementById("form:DocuIden");
+                        var rect = element.getBoundingClientRect(); //Obtiene la posicion absoluta del elemento
+                        console.log(rect.top, rect.right, rect.bottom, rect.left); 
                         
                         $("#listaPersonas").css({"display":""});
                         $("#listaPersonas").css("top",(x.top + h ) + "px");
