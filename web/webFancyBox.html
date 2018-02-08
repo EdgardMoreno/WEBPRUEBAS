@@ -31,17 +31,43 @@ and open the template in the editor.
             $(document).ready(function () {
                 
                 $("#galeria a").fancybox();
+                
+                
+                /*$("#idDiv").fancybox({
+                      type              :  "inline",
+                      width             :   800,
+                      height            :   600,
+                      content           : "holaa",
+                      orig              : "#divPruebas",
+                    
+                });*/
+                
+                $("#idLink").fancybox({
+                        'scrolling'		: 'no',
+                        'titleShow'		: false,
+                         width                  :   800,
+                         height                 :   600,
+                        'onClosed'		: function() {
+                            //$("#login_error").hide();
+                        }
+                });
 
               
                
 
             });
+            
+            
+            function fnCerrarFancy(){
+                parent.$.fancybox.close();
+            }
+            
         </script>
 
     </head>
     <body>
         
-        <div><h2>EJEMPLO DEL USO DE LA LIBRERIA FANCY BOX</h2></div>
+        <div><h2>1.- EJEMPLO DEL USO DE LA LIBRERIA FANCY BOX</h2></div>
         
         <div id="galeria">
             <a href="resources/img/fotomural_1.jpg" title="fotomural_1"><img src="resources/img/fotomural_1.jpg" id="imagen1" alt="fotomural_1" /></a>
@@ -49,5 +75,15 @@ and open the template in the editor.
             <a href="resources/img/fotomural_3.jpg" title="fotomural_3"><img src="resources/img/fotomural_3.jpg" id="imagen3" alt="fotomural_3"/></a>
            
         </div>
+        <br/>
+        <h2>2.- EJEMPLO COMO Mostrar Contenido de un DIV con Fancy BOX</h2>
+        <a id="idLink" href="#divFormulario" title="fotomural_1">Mostar</a>
+        <div id="divFormulario">
+            <p id="primerParrafo">Llenar Formulario</p>
+            <label>Nombre:</label>
+            <input type="text" value="holaaa" name="name" id="name"/>
+            <input type="button" value="Enviar" onclick="fnCerrarFancy()"/>
+        </div>
+        
     </body>
 </html>
