@@ -9,21 +9,50 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-    <servlet>        
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>PrimerServlet</servlet-name>
         <servlet-class>com.pruebas.servlets.PrimerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PrimerServlet</servlet-name>
         <url-pattern>/PrimerServlet</url-pattern>
-    </servlet-mapping>    
-    
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>MenuServlet</servlet-name>
+        <servlet-class>com.pruebas.servlets.login.MenuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MenuServlet</servlet-name>
+        <url-pattern>/MenuServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ValidarServlet</servlet-name>
+        <servlet-class>com.pruebas.servlets.login.ValidarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>com.pruebas.servlets.login.ErrorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CerrarSession</servlet-name>
+        <servlet-class>com.pruebas.servlets.login.CerrarSession</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValidarServlet</servlet-name>
+        <url-pattern>/ValidarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/ErrorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CerrarSession</servlet-name>
+        <url-pattern>/CerrarSession</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
