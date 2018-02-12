@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <h:outputStylesheet name="/css/jquery-ui.min.css"/>        
+        
+        <script src="#{request.contextPath}/faces/resources/js/jquery-3.2.1.min.js"></script>
+        <script src="#{request.contextPath}/faces/resources/js/jquery-ui.min.js"></script>
+        
+        <script>
+            
+            function mostrarFormularioDialog(){
+                
+                $("#idDivFormularioDialog").dialog({
+                        title: "Registrar Persona",
+                        //dialogClass: "no-close",                        
+                        open: true,
+                        //height: 400, //Por defecto es auto
+                        maxHeight: 500,
+                        width: 800,
+                        maxWidth: 1000,
+                        closeOnEscape: false,
+                        modal: true,
+                        classes: {                            
+                            //"ui-dialog": "fondoRojo" //Reemplaza el estilo (ui-corner-all) por defecto
+                        },
+                        show: {
+                            effect: "blind",
+                            duration: 200
+                        },
+                        buttons: [
+                            {
+                                text: "Ok",
+                                icon: "ui-icon-heart",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+
+                                // Uncommenting the following line would hide the text,
+                                // resulting in the label being used as a tooltip
+                                //showText: false
+                            }
+                        ]
+
+                    });
+                    
+                    return false;
+            }
+            
+            
+        </script>
+        
+    </h:head>
+    <h:body>
+        <div>TODO write content</div>
+
+        <h:form>
+            
+            <h3>Mostrar Contenido Div en Dialog </h3>
+            <p>El valor ingresado en el campo, al dar click en "Enviar" no llega al ManagedBean. LLega como mull</p>
+            <h:commandLink value="Mostrar" onclick="return mostrarFormularioDialog()"/>
+            <div id="idDivFormularioDialog">
+                <p>El valor ingresado en el campo, al dar click en "Enviar" no llega al ManagedBean. LLega como mull</p>
+                <label> Nombre: </label>
+                <h:inputText id="apellido"  value="#{controllerQueyConfirm.sic1pers.codIden}" />                
+                <h:commandLink value="Enviar" onclick="mostrarFormularioDialog()" actionListener="#{controllerQueyConfirm.grabar()}"/>
+            </div>           
+
+        </h:form>
+        
+    </h:body>
+    
+</html>

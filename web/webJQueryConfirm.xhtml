@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+        <h:outputStylesheet name="/css/customizer.css"/>
+        <h:outputStylesheet name="/css/jquery-confirm-3.3.css"/>
+        <h:outputStylesheet name="/css/bootstrap.min.css"/>
+
+        <script src="#{request.contextPath}/faces/resources/js/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="#{request.contextPath}/faces/resources/js/jquery-confirm-3.3.js"></script>
+        <script src="#{request.contextPath}/faces/resources/js/customizerJS.js"></script>
+
+        <style>           
+
+
+
+        </style>
+
+        <script>
+            /*Funcion que permite mostrar ventanas de confirmacion*/
+            function fnShowDialogConfirm() {
+                
+                var div1 = document.getElementById("origen");
+                
+
+                $.confirm({
+                    columnClass: 'col-md-4 col-md-offset-4', //Tamano de la ventana
+                    title: 'Confirmación',
+                    content: div1,
+                    type: 'blue',
+                    typeAnimated: true,
+                    draggable: true, //Animacion para que vibre
+                    animation: 'scaleX',
+                    closeAnimation: 'scaleX',
+
+                    buttons: {
+                        Aceptar: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-primary',
+                            action: function () {
+
+                            }
+                        },
+                        Cancelar: {
+                            text: 'Cancelar',
+                            btnClass: 'btn-primary'
+                        }
+                    }
+                });
+            }
+            ;
+
+            function fnMostrarDialoj() {
+                fnCreateDialog();
+                //$("#principal").css("display", "inline-block");
+
+
+            }
+
+            function fnOcultarDiv() {
+                $("#principal").hide();
+            }
+
+        </script>
+
+    </h:head>
+    <h:body>
+
+
+        <h:form id="form">
+
+            <h:outputLabel value="holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+            <input type="button"  value="Mostrar " onclick="fnShowDialogConfirm()" />
+            <input type="button" id="btnMostrarDialoj" value="Mostrar Dialoj" onclick="fnMostrarDialoj()" />
+            
+            <div id="abc"></div>
+
+
+
+            <div id="origen">
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="DNI:" />
+                        </td>
+                        <td>
+                            <h:inputText id="codIden" autocomplete="off" value="#{controllerQueyConfirm.sic1pers.codIden}" /> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Nombre:" />
+                        </td>
+                        <td>
+                            <h:inputText id="name" autocomplete="off" value="#{controllerQueyConfirm.sic1pers.desPers}" /> 
+                        </td>
+                    </tr>
+                </table>
+                <h:commandLink id="btnRegistrar" value="Grabar" actionListener="#{controllerQueyConfirm.grabar()}"/>
+                <h:commandLink value="Cancelar" onclick="fnOcultarDiv()"/>
+            </div>
+
+        </h:form>       
+
+    </h:body>
+</html>

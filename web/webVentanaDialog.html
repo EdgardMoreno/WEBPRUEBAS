@@ -12,7 +12,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.min.css">        
+        <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.min.css">         
+        
+        
 
         <style type="text/css">
 
@@ -96,6 +98,42 @@ and open the template in the editor.
             function abrirArchivoPlano() {
 
                 $("#plano").load("resources/archivos/contenido.txt");
+            };
+            
+            function mostrarFormularioDialog(){
+                
+                $("#idDivFormularioDialog").dialog({
+                        title: "Registrar Persona",
+                        //dialogClass: "no-close",                        
+                        open: true,
+                        //height: 400, //Por defecto es auto
+                        maxHeight: 500,
+                        width: 800,
+                        maxWidth: 1000,
+                        closeOnEscape: false,
+                        modal: true,
+                        classes: {                            
+                            //"ui-dialog": "fondoRojo" //Reemplaza el estilo (ui-corner-all) por defecto
+                        },
+                        show: {
+                            effect: "blind",
+                            duration: 200
+                        },
+                        buttons: [
+                            {
+                                text: "Ok",
+                                icon: "ui-icon-heart",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+
+                                // Uncommenting the following line would hide the text,
+                                // resulting in the label being used as a tooltip
+                                //showText: false
+                            }
+                        ]
+
+                    });                
             }
 
 
@@ -110,7 +148,9 @@ and open the template in the editor.
             <input id="btnDialog" type="button" value="Registra Persona en DIALOG"/>
             <label> DNI: </label>
             <input id="dni" type="text" name="dni" />
+            
             <div id="dialog">
+                 
                 <div id="principal" ></div>
             </div>        
 
@@ -128,6 +168,16 @@ and open the template in the editor.
                 <input id="nombre" type="text" name="nombre" value="test!!" />
 
             </div>
+            
+            <h3>Mostrar Contenido Div en Dialog </h3>
+            <input type="button" value="Mostrar" onclick="mostrarFormularioDialog()"/>
+            <div id="idDivFormularioDialog">
+                
+                <label> Nombre: </label>
+                <input id="apellido" type="text" name="apellido" />
+                <input type="button" value="Enviar"/>
+            </div>
+                
             
 
         </form>

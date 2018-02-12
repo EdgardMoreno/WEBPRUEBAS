@@ -95,3 +95,49 @@ function fnValidateDocuIden(val){
 };
 
 
+function fnCreateDialog(){
+
+    var div1 = document.getElementById("origen");
+    console.log("div1: " + div1.innerHTML);
+
+
+
+    var cadena = 
+    '<div id="principal" class="jconfirm jconfirm-supervan jconfirm-open" >' +
+        
+        '<div class="jconfirm-bg" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);">' +
+
+        '</div>' +
+
+        '<div class="jconfirm-scrollpane"> ' +
+            '<div class="jconfirm-row"> ' +
+                '<div class="jconfirm-cell">' +
+                    '<div class="jconfirm-holder" style="padding-top: 40px; padding-bottom: 40px;">' +
+                        '<div class="jc-bs3-container container">' +
+                            '<div class="jc-bs3-row row justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center">' +
+                                '<div class="jconfirm-box-container col-md-4 col-md-offset-4 " style="transform: translate(0px, 0px); transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);">' +
+                                    '<div class="jconfirm-content" style="background-color: white; border: 10px solid #C0C0C0; padding: 10px"  >' +
+
+                                    '</div>' +                                    
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+    '</div> ';
+
+    
+    /*$("body").append(cadena);
+    $("#origen").appendTo(".jconfirm-content");*/
+    /*alert("hola");
+    $(cadena).prependTo("#origen");*/
+    
+    alert("hola");    
+    $(cadena).appendTo("#abc");
+    alert("hola");
+    $("#origen").appendTo(".jconfirm-content");
+    console.log("div_2" + document.getElementById("abc").innerHTML);
+
+}
